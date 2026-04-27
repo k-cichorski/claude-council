@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "council",
+  "description": "Multi-perspective deliberation flow for Claude Code.",
+  "owner": {
+    "name": "Kuba Cichorski"
+  },
+  "plugins": [
+    {
+      "name": "council",
+      "source": "./.claude-plugin",
+      "description": "Multi-perspective deliberation: leader + parallel-subagent council members research, critique, and drive implementation through writing-plans + executing-plans. Persists artifacts under .council/ for audit and cross-deliberation learning.",
+      "version": "0.1.0",
+      "category": "development",
+      "author": {
+        "name": "Kuba Cichorski"
+      },
+      "keywords": ["council", "deliberation", "design", "review", "subagents"]
+    }
+  ]
+}

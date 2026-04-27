@@ -1,0 +1,18 @@
+{
+  "name": "council",
+  "version": "0.1.0",
+  "description": "Multi-perspective deliberation flow: a leader orchestrates parallel-subagent council members through structured research, critique, and consensus rounds, then drives implementation through superpowers:writing-plans + executing-plans.",
+  "author": {
+    "name": "Kuba Cichorski"
+  },
+  "license": "MIT",
+  "commands": [],
+  "keywords": [
+    "council",
+    "deliberation",
+    "design",
+    "review",
+    "subagents",
+    "orchestration"
+  ]
+}
