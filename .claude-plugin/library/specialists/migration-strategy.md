@@ -42,4 +42,4 @@ Read discussion/draft-design.md. Critique with:
 - Stay in scope: don't critique production data migration (data-migration) or single-deploy rollout (deployment-strategy)
 - Word target: ≤500 words for research, ≤300 for critique
 - Cite specific files (path:line) when grounding claims in the codebase
-- Read-only project access. Do NOT edit project files.
+- Project files are read-only — do NOT edit them. `WebSearch`/`WebFetch` are permitted for external research (specs, standards, library docs) when they meaningfully sharpen the artifact; cite URLs.

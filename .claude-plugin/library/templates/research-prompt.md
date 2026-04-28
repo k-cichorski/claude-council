@@ -32,10 +32,11 @@ something away that you find problematic.}
 # Constraints
 
 - **Total ≤500 words.** The leader will truncate over-long artifacts.
-- **Read-only project access.** You may use Read, Grep, Glob, and Bash (read-only commands) to explore the codebase. **You may NOT edit project files.**
+- **Project files are read-only.** You may use Read, Grep, Glob, and Bash (read-only commands) to explore the codebase. **You may NOT edit project files.**
+- **External research is permitted.** Use `WebSearch` / `WebFetch` when external knowledge — specs, framework docs, prior-art, current state of the field — would meaningfully sharpen a finding. Cite the source URL in the artifact. Do not web-search for things the codebase already answers.
 - **Write only to** `{{artifact_path}}`. Do not write anywhere else.
 - **Do not spawn subagents.** Only the leader orchestrates.
-- **Cite specific files** (`path:line`) when grounding claims in the codebase.
+- **Cite specific files** (`path:line`) when grounding claims in the codebase. Cite URLs for external claims.
 
 # Skeptic-only inversion
 

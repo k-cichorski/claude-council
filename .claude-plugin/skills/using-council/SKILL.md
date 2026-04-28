@@ -54,10 +54,11 @@ Or import them inline in a small Bash heredoc when you need a one-shot.
    - Use `make_slug(headline)` to generate the slug.
    - Create the directory: `.council/<slug>/`.
 
-2. **Codebase exploration (autonomous).**
+2. **Context gathering (autonomous).**
    - Read `README.md`, `pyproject.toml`/`package.json`, top-level config files.
    - Glob the source tree to learn the layout.
    - Grep for terms in the brief to find existing structure that will collide or extend.
+   - Use `WebSearch`/`WebFetch` when the brief depends on external knowledge — specs, framework docs, current state of the art, prior incidents, library versions. Cite sources you'll feed into BRIEF.md. Skip the web when the codebase or user can answer.
    - Spend whatever time it takes — this is cheaper than asking the user.
 
 3. **Prior verdicts scan.**

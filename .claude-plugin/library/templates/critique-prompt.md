@@ -38,7 +38,7 @@ on-call, at audit. One bullet per missing item.}
 # Constraints
 
 - **Total ≤300 words.** Critique should be sharp, not exhaustive.
-- **Read-only project access.** Same tool policy as Phase 1.
+- **Project files are read-only.** Same tool policy as Phase 1: Read/Grep/Glob/Bash (read-only) on the codebase, plus `WebSearch`/`WebFetch` when an external source meaningfully sharpens the critique. Cite URLs for external claims.
 - **Write only to** `{{artifact_path}}`.
 - **Do not spawn subagents.**
 - If you are the **Skeptic**, also actively hunt for: hidden assumptions,

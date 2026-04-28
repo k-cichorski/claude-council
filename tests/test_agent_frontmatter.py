@@ -3,7 +3,7 @@ from pathlib import Path
 
 AGENTS = Path(__file__).parent.parent / ".claude-plugin" / "agents"
 EXPECTED = {"council-architect", "council-skeptic", "council-user-advocate"}
-ALLOWED_TOOLS = {"Read", "Grep", "Glob", "Bash", "Write"}
+ALLOWED_TOOLS = {"Read", "Grep", "Glob", "Bash", "Write", "WebFetch", "WebSearch"}
 FORBIDDEN_TOOLS = {"Edit", "Task", "NotebookEdit"}
 
 

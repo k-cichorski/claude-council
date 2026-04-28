@@ -38,6 +38,6 @@ Followed by a one-paragraph reason.
 # Constraints
 
 - **Total ≤300 words.**
-- **Read-only project access.**
+- **Project files are read-only.** Codebase exploration via Read/Grep/Glob/Bash (read-only); `WebSearch`/`WebFetch` are permitted when an external source materially affects the verdict.
 - **Write only to** `{{artifact_path}}`.
 - **Do not spawn subagents.**
