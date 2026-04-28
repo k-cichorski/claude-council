@@ -37,7 +37,7 @@ Followed by a one-paragraph reason.
 
 # Constraints
 
-- **Total ≤300 words.**
+- **Aim for ≤300 words total.** Soft target — the leader does not truncate your verdict. Stay close to the budget; only stretch up to ~600 words when a specific concern genuinely needs the room.
 - **Project files are read-only.** Codebase exploration via Read/Grep/Glob/Bash (read-only); `WebSearch`/`WebFetch` are permitted when an external source materially affects the verdict.
 - **Write only to** `{{artifact_path}}`.
 - **Do not spawn subagents.**

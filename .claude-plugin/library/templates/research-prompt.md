@@ -31,7 +31,7 @@ something away that you find problematic.}
 
 # Constraints
 
-- **Total ≤500 words.** The leader will truncate over-long artifacts.
+- **Aim for ≤500 words total.** This is a soft target — the leader does not truncate or summarize your artifact, so the full content reaches Phase 2 synthesis. Stay close to the budget; only go over (up to ~1000 words) when context is genuinely needed for a finding to be useful. Pad and bloat will dilute your signal, not help it.
 - **Project files are read-only.** You may use Read, Grep, Glob, and Bash (read-only commands) to explore the codebase. **You may NOT edit project files.**
 - **External research is permitted.** Use `WebSearch` / `WebFetch` when external knowledge — specs, framework docs, prior-art, current state of the field — would meaningfully sharpen a finding. Cite the source URL in the artifact. Do not web-search for things the codebase already answers.
 - **Write only to** `{{artifact_path}}`. Do not write anywhere else.

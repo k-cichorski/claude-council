@@ -122,7 +122,7 @@ Or import them inline in a small Bash heredoc when you need a one-shot.
 3. **Collect & validate artifacts.**
    For each returned subagent, verify the artifact file exists at the expected path and contains the required `## Findings`, `## Tensions`, `## Initial Recommendation`, `## Open Questions` sections.
    - If missing or malformed: retry that member ONCE with a corrective prompt (point at the missing section). On second failure: leave the member's slot empty and add a `## Dissents` entry to VERDICT.md later (`{role}: research unavailable`).
-   - If artifact >500 words: log a warning in STATE.json (`research_truncated: [<role>, ...]`) and continue. Do not auto-truncate the file — the leader notes the overflow but uses the full content for synthesis.
+   - **Word-budget policy.** The 500-word target is soft. **Never auto-truncate or summarize a member's artifact** — Phase 2 synthesis always uses the full content. If the artifact is >1000 words (i.e. >2× the target), append the role to `state.research_over_budget` so Phase 2 knows to read carefully. Below 1000 words: no warning, no action — modest overruns are expected when context is genuinely needed.
 
 4. **Mark members done.**
    For each member with a valid artifact: `state.mark_done(role)`. Persist STATE.json.
@@ -194,6 +194,7 @@ Phase 3 is to verify the leader didn't paper over real splits in Phase 2.
    - Skeptic gets the same template; the template's instructions already direct the Skeptic to hunt for hidden assumptions, premature commitments, etc.
 
 3. **Collect & validate.** Each returned artifact must contain `## Agree`, `## Reject`, `## Missing`. Same retry/failure semantics as Phase 1.
+   - **Word-budget policy.** The 300-word target is soft. **Never auto-truncate or summarize a member's critique** — Phase 4 reads the full text. If a critique is >600 words (i.e. >2× the target), append the role to `state.critique_over_budget`. Below 600 words: no warning, no action.
 
 4. **Consolidate.**
    Write `discussion/round2-critique.md` by stitching all `_critique-<role>.md` files together with a `## {role}` header above each member's section. Keep raw text — do not summarize across members; that's the leader's Phase 4 job.
@@ -406,7 +407,8 @@ Treat as a fresh start unless directory artifacts exist. If artifacts exist, see
 
 - The leader always runs in the main session. Members are always subagents dispatched via the Task tool.
 - Members never edit project code. Their only Write target is their assigned artifact path under `.council/<slug>/`.
-- Hard caps: ≤7 members per council (3 core + ≤4 specialists), ≤2 critique rounds (Phase 3 + optional Phase 4b), ≤500-word research artifacts, ≤300-word critique/checkpoint artifacts.
+- Hard caps: ≤7 members per council (3 core + ≤4 specialists), ≤2 critique rounds (Phase 3 + optional Phase 4b).
+- Word budgets are **soft targets**, not hard caps: 500 words for research, 300 for critique/checkpoint. The leader **never** auto-truncates or summarizes a member's artifact — full content is always preserved for downstream phases. Going up to 2× the target is fine; beyond that, the role is logged to `state.research_over_budget` / `state.critique_over_budget` for awareness, but the artifact is still used in full.
 - Auto-commit at exactly two points: end of Phase 4 (`VERDICT.md`), end of Phase 6 (`final-review.md`). All other artifacts are written but not auto-committed.
 - Phase boundaries are commit-able; resumability via `STATE.json` is non-negotiable.
 - Reuse, do not reinvent: Phase 5 calls `superpowers:writing-plans`; Phase 6 calls `superpowers:executing-plans`.

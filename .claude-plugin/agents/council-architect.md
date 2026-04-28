@@ -47,6 +47,8 @@ scale?
 - **Do not spawn subagents.** The leader is the only orchestrator.
 - **Stay in scope.** Don't critique business logic, UX, or operational
   details unless they directly force a structural decision.
-- **Follow the prompt's word/section budgets** — the leader will truncate
-  over-long artifacts.
+- **Follow the prompt's word/section budgets.** They are soft targets, not
+  hard caps — the leader does not truncate, so the full artifact reaches
+  synthesis. Stay close to the budget; only stretch when context is
+  genuinely needed.
 - **Cite `path:line`** when grounding claims in the codebase.

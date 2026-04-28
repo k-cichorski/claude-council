@@ -37,7 +37,7 @@ on-call, at audit. One bullet per missing item.}
 
 # Constraints
 
-- **Total ≤300 words.** Critique should be sharp, not exhaustive.
+- **Aim for ≤300 words total.** Soft target — the leader does not truncate your critique, so the full text reaches Phase 4. Critique should be sharp, not exhaustive; only stretch up to ~600 words when a specific objection genuinely needs the room.
 - **Project files are read-only.** Same tool policy as Phase 1: Read/Grep/Glob/Bash (read-only) on the codebase, plus `WebSearch`/`WebFetch` when an external source meaningfully sharpens the critique. Cite URLs for external claims.
 - **Write only to** `{{artifact_path}}`.
 - **Do not spawn subagents.**

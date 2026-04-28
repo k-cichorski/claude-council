@@ -53,7 +53,8 @@ class CouncilState:
     phase_4b_triggered: bool
     started_at: str
     last_updated_at: str
-    research_truncated: list[str] = field(default_factory=list)
+    research_over_budget: list[str] = field(default_factory=list)
+    critique_over_budget: list[str] = field(default_factory=list)
 
     def __post_init__(self):
         if self.phase not in VALID_PHASES:
@@ -73,6 +74,10 @@ class CouncilState:
 
     @classmethod
     def from_dict(cls, d: dict) -> "CouncilState":
+        # `research_truncated` is the legacy key (pre-0.1.2, when the leader was
+        # documented as truncating overflow). The leader never actually truncates
+        # now — the field is a ledger of artifacts that exceeded the soft budget.
+        over_budget = d.get("research_over_budget", d.get("research_truncated", []))
         return cls(
             slug=d["slug"],
             phase=d["phase"],
@@ -82,7 +87,8 @@ class CouncilState:
             phase_4b_triggered=bool(d["phase_4b_triggered"]),
             started_at=d["started_at"],
             last_updated_at=d["last_updated_at"],
-            research_truncated=list(d.get("research_truncated", [])),
+            research_over_budget=list(over_budget),
+            critique_over_budget=list(d.get("critique_over_budget", [])),
         )
 
 

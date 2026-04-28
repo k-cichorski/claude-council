@@ -92,24 +92,26 @@ def test_mark_unknown_role_raises(tmp_path):
         s.mark_done("ghost")
 
 
-def test_research_truncated_round_trip(tmp_path):
-    """Phase 1 truncation warnings must persist across resume."""
+def test_research_over_budget_round_trip(tmp_path):
+    """Phase 1 over-budget warnings must persist across resume."""
     s = CouncilState(
         slug="t", phase="phase-2-synthesis",
         members=[MemberRecord("architect", "core", "research/architect.md", True)],
         draft_design_written=False, verdict_committed=False, phase_4b_triggered=False,
         started_at="2026-04-26T14:00:00Z", last_updated_at="2026-04-26T14:00:00Z",
     )
-    s.research_truncated.append("architect")
-    s.research_truncated.append("auth-protocol")
+    s.research_over_budget.append("architect")
+    s.research_over_budget.append("auth-protocol")
+    s.critique_over_budget.append("skeptic")
     p = tmp_path / "STATE.json"
     write_state(p, s)
     loaded = load_state(p)
-    assert loaded.research_truncated == ["architect", "auth-protocol"]
+    assert loaded.research_over_budget == ["architect", "auth-protocol"]
+    assert loaded.critique_over_budget == ["skeptic"]
 
 
-def test_research_truncated_default_empty(tmp_path):
-    """Older STATE.json files (pre-research_truncated) must still load."""
+def test_over_budget_defaults_empty(tmp_path):
+    """Older STATE.json files (pre-over-budget fields) must still load."""
     legacy = {
         "slug": "t", "phase": "phase-1-research", "members": [],
         "draft_design_written": False, "verdict_committed": False, "phase_4b_triggered": False,
@@ -118,7 +120,22 @@ def test_research_truncated_default_empty(tmp_path):
     p = tmp_path / "STATE.json"
     p.write_text(json.dumps(legacy))
     loaded = load_state(p)
-    assert loaded.research_truncated == []
+    assert loaded.research_over_budget == []
+    assert loaded.critique_over_budget == []
+
+
+def test_legacy_research_truncated_field_is_read(tmp_path):
+    """STATE.json written by an older council version uses `research_truncated`."""
+    legacy = {
+        "slug": "t", "phase": "phase-2-synthesis", "members": [],
+        "draft_design_written": False, "verdict_committed": False, "phase_4b_triggered": False,
+        "started_at": "2026-04-26T14:00:00Z", "last_updated_at": "2026-04-26T14:00:00Z",
+        "research_truncated": ["architect", "skeptic"],
+    }
+    p = tmp_path / "STATE.json"
+    p.write_text(json.dumps(legacy))
+    loaded = load_state(p)
+    assert loaded.research_over_budget == ["architect", "skeptic"]
 
 
 def test_phase_4b_signoff_phase_valid():
